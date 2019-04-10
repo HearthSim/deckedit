@@ -1,3 +1,3 @@
-# deckedit
+# deckwarper
 
-A small website to edit and manipulate Hearthstone decks.
+A tiny web-based tool to create and edit Hearthstone decks.
