@@ -17,7 +17,9 @@ class CardField extends Component {
 		const readOnly = typeof this.props.setDbfId !== "function";
 		return (
 			<input
-				type="number"
+				type="text"
+				pattern="[0-9]*"
+				inputMode="numeric"
 				value={this.state.value !== null ? this.state.value : this.props.dbfId}
 				onChange={this.onChange}
 				className={classNames.join(" ")}
