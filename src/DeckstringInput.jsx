@@ -33,11 +33,11 @@ class DeckstringInput extends Component {
 		const lines = input.split("\n");
 		for (let line of lines) {
 			line = line.trim();
-			if (line.startsWith("#")) {
+			if (!line || line.startsWith("#")) {
 				continue;
 			}
 			try {
-				const deck = decode(input);
+				const deck = decode(line);
 				this.props.reset();
 				this.props.setHeroes(deck.heroes);
 				this.props.setCards(deck.cards);
