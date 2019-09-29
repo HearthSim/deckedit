@@ -22,7 +22,8 @@ class DeckstringInput extends Component {
 		if (
 			this.importDeckstring(value) ||
 			this.importTSV(value) ||
-			this.importCSV(value)
+			this.importCSV(value) ||
+			this.importJSON(value)
 		) {
 			return;
 		}
@@ -57,6 +58,30 @@ class DeckstringInput extends Component {
 
 	importCSV(input) {
 		return this.importSV(input, ",");
+	}
+
+	importJSON(input) {
+		try {
+			const parsed = JSON.parse(input);
+			if (!Array.isArray(parsed)) {
+				return false;
+			}
+			const cards = parsed.map(elem => {
+				if (Array.isArray(elem) && elem.length === 2) {
+					return elem;
+				}
+				if (!isNaN(+elem)) {
+					return +elem;
+				}
+				return -1;
+			});
+			this.props.reset();
+			this.props.setCards(cards);
+			return true;
+		}
+		catch(e) {
+			return false;
+		}
 	}
 
 	importSV(input, separator) {
