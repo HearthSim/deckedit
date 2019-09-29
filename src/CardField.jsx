@@ -30,7 +30,10 @@ class CardField extends Component {
 	}
 
 	onChange = (e) => {
-		const value = e.target.value;
+		let value = e.target.value;
+		if (+value === +this.props.dbfId) {
+			value = null;
+		}
 		this.setState({value});
 	};
 
@@ -38,8 +41,13 @@ class CardField extends Component {
 		if (typeof this.props.setDbfId !== "function") {
 			return;
 		}
-		const value = +this.state.value;
-		this.props.setDbfId(value);
+		if (this.state.value === null) {
+			return;
+		}
+		if (this.state.value !== "") {
+			const value = +this.state.value;
+			this.props.setDbfId(value);
+		}
 		this.setState({value: null});
 	};
 
